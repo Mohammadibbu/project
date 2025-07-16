@@ -4,19 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Switch } from '@/components/ui/switch';
 import { Progress } from '@/components/ui/progress';
-import { 
-  Calendar, 
-  CheckCircle, 
-  Clock, 
-  Settings, 
-  Zap, 
-  AlertCircle,
-  Sync,
-  ExternalLink,
-  Shield,
-  Download,
-  Upload
-} from 'lucide-react';
+import { Calendar, CheckCircle, Clock, Settings, Zap, AlertCircle, FolderSync as Sync, ExternalLink, Shield, Download, Upload } from 'lucide-react';
 import { toast } from 'sonner';
 
 interface Integration {
