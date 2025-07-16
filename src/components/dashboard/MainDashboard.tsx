@@ -4,28 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { 
-  Calendar, 
-  Brain, 
-  Zap, 
-  Target, 
-  Clock, 
-  CheckCircle2, 
-  Plus,
-  Sync,
-  Focus,
-  BarChart3,
-  Settings,
-  Bell,
-  Play,
-  Pause,
-  RotateCcw,
-  Users,
-  Lightbulb,
-  TrendingUp,
-  AlertTriangle,
-  Coffee
-} from 'lucide-react';
+import { Calendar, Brain, Zap, Target, Clock, CheckCircle2, Plus, FolderSync as Sync, Focus, BarChart3, Settings, Bell, Play, Pause, RotateCcw, Users, Lightbulb, TrendingUp, AlertTriangle, Coffee } from 'lucide-react';
 import { toast } from 'sonner';
 import IntegrationPanel from './IntegrationPanel';
 import TaskManager from './TaskManager';
