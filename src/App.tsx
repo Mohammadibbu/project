@@ -1,150 +1,151 @@
 import React, { useState, useEffect } from "react";
 import { Toaster } from "@/components/ui/sonner";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Calendar, Brain, Sparkles, BarChart3, Settings, Bell } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import SmartCalendar from "@/components/SmartCalendar";
-import FocusTimeScheduler from "@/components/FocusTimeScheduler";
-import ModernDashboard from "@/components/enhanced/ModernDashboard";
 import { ThemeProvider } from "@/components/theme/ThemeProvider";
 import { ThemeToggle } from "@/components/theme/ThemeToggle";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { 
+  Calendar, 
+  Brain, 
+  Sparkles, 
+  BarChart3, 
+  Settings, 
+  Bell, 
+  User,
+  Zap,
+  Target,
+  Clock
+} from "lucide-react";
+import MainDashboard from "@/components/dashboard/MainDashboard";
 
 function App() {
-  const [activeTab, setActiveTab] = useState("dashboard");
-  const [notifications, setNotifications] = useState(3);
   const [isLoaded, setIsLoaded] = useState(false);
+  const [notifications, setNotifications] = useState(3);
 
   useEffect(() => {
-    // Simulate app loading
-    setTimeout(() => setIsLoaded(true), 300);
+    // Simulate app loading with enhanced animation
+    setTimeout(() => setIsLoaded(true), 800);
   }, []);
 
   if (!isLoaded) {
     return (
-      <div className="min-h-screen bg-background flex items-center justify-center">
-        <div className="text-center space-y-4">
-          <div className="loading-spinner w-8 h-8 mx-auto text-primary" />
-          <p className="text-muted-foreground">Loading your workspace...</p>
+      <div className="min-h-screen bg-gradient-to-br from-background via-background to-primary/5 flex items-center justify-center">
+        <div className="text-center space-y-6">
+          <div className="relative">
+            <div className="w-16 h-16 bg-gradient-to-br from-primary to-ai-primary rounded-2xl flex items-center justify-center mx-auto animate-pulse-glow">
+              <Brain className="w-8 h-8 text-white" />
+            </div>
+            <div className="absolute -top-2 -right-2 w-6 h-6 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full flex items-center justify-center">
+              <Sparkles className="w-3 h-3 text-white" />
+            </div>
+          </div>
+          
+          <div className="space-y-2">
+            <h1 className="text-2xl font-bold text-gradient">AI Task Manager</h1>
+            <p className="text-muted-foreground">Initializing your intelligent workspace...</p>
+          </div>
+          
+          <div className="flex items-center justify-center space-x-2">
+            <div className="loading-spinner w-5 h-5 text-primary" />
+            <span className="text-sm text-muted-foreground">Loading AI models...</span>
+          </div>
         </div>
       </div>
     );
   }
 
   return (
-    <ThemeProvider defaultTheme="light" storageKey="task-manager-theme">
+    <ThemeProvider defaultTheme="light" storageKey="ai-task-manager-theme">
       <div className="min-h-screen bg-background font-inter antialiased">
-        <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-          {/* Enhanced Header */}
-          <div className="sticky top-0 z-50 border-b border-border/50 bg-background/80 backdrop-blur-lg">
-            <div className="container mx-auto px-6">
-              <div className="flex items-center justify-between h-16">
-                {/* Logo and Navigation */}
-                <div className="flex items-center space-x-8">
-                  <div className="flex items-center space-x-3">
-                    <div className="w-8 h-8 bg-gradient-to-br from-primary to-ai-primary rounded-lg flex items-center justify-center">
-                      <Sparkles className="w-5 h-5 text-white" />
+        {/* Enhanced Header */}
+        <div className="sticky top-0 z-50 border-b border-border/50 bg-background/80 backdrop-blur-lg">
+          <div className="container mx-auto px-6">
+            <div className="flex items-center justify-between h-16">
+              {/* Logo and Branding */}
+              <div className="flex items-center space-x-4">
+                <div className="flex items-center space-x-3">
+                  <div className="relative">
+                    <div className="w-10 h-10 bg-gradient-to-br from-primary to-ai-primary rounded-xl flex items-center justify-center">
+                      <Brain className="w-5 h-5 text-white" />
                     </div>
-                    <div>
-                      <h1 className="text-xl font-bold text-gradient">TaskFlow AI</h1>
-                      <p className="text-xs text-muted-foreground">Intelligent Task Management</p>
+                    <div className="absolute -top-1 -right-1 w-4 h-4 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full flex items-center justify-center">
+                      <Sparkles className="w-2 h-2 text-white" />
                     </div>
                   </div>
-
-                  <TabsList className="bg-muted/50 p-1 rounded-lg">
-                    <TabsTrigger 
-                      value="dashboard" 
-                      className="flex items-center gap-2 px-4 py-2 rounded-md transition-all duration-200 data-[state=active]:bg-background data-[state=active]:shadow-soft"
-                    >
-                      <Sparkles className="h-4 w-4" />
-                      <span className="hidden sm:inline">Dashboard</span>
-                    </TabsTrigger>
-                    <TabsTrigger 
-                      value="smart-calendar"
-                      className="flex items-center gap-2 px-4 py-2 rounded-md transition-all duration-200 data-[state=active]:bg-background data-[state=active]:shadow-soft"
-                    >
-                      <Calendar className="h-4 w-4" />
-                      <span className="hidden sm:inline">Calendar</span>
-                    </TabsTrigger>
-                    <TabsTrigger 
-                      value="focus-scheduler"
-                      className="flex items-center gap-2 px-4 py-2 rounded-md transition-all duration-200 data-[state=active]:bg-background data-[state=active]:shadow-soft"
-                    >
-                      <Brain className="h-4 w-4" />
-                      <span className="hidden sm:inline">Focus</span>
-                    </TabsTrigger>
-                    <TabsTrigger 
-                      value="analytics"
-                      className="flex items-center gap-2 px-4 py-2 rounded-md transition-all duration-200 data-[state=active]:bg-background data-[state=active]:shadow-soft"
-                    >
-                      <BarChart3 className="h-4 w-4" />
-                      <span className="hidden sm:inline">Analytics</span>
-                    </TabsTrigger>
-                  </TabsList>
+                  <div>
+                    <h1 className="text-xl font-bold text-gradient">TaskFlow AI</h1>
+                    <p className="text-xs text-muted-foreground">Smart Task Management</p>
+                  </div>
                 </div>
 
-                {/* Header Actions */}
-                <div className="flex items-center space-x-3">
-                  {/* Notifications */}
-                  <Button variant="ghost" size="icon" className="relative">
-                    <Bell className="h-5 w-5" />
-                    {notifications > 0 && (
-                      <Badge className="absolute -top-1 -right-1 h-5 w-5 rounded-full p-0 text-xs bg-danger text-danger-foreground animate-pulse-glow">
-                        {notifications}
-                      </Badge>
-                    )}
-                  </Button>
+                {/* Status Indicators */}
+                <div className="hidden md:flex items-center space-x-3">
+                  <Badge className="bg-success/10 text-success border-success/20">
+                    <div className="w-2 h-2 bg-success rounded-full mr-2 animate-pulse"></div>
+                    AI Active
+                  </Badge>
+                  <Badge variant="outline" className="text-xs">
+                    <Zap className="w-3 h-3 mr-1" />
+                    3 Integrations
+                  </Badge>
+                </div>
+              </div>
 
-                  {/* Settings */}
-                  <Button variant="ghost" size="icon">
-                    <Settings className="h-5 w-5" />
-                  </Button>
+              {/* Header Actions */}
+              <div className="flex items-center space-x-3">
+                {/* Quick Stats */}
+                <div className="hidden lg:flex items-center space-x-4 text-sm">
+                  <div className="flex items-center gap-1">
+                    <Target className="w-4 h-4 text-primary" />
+                    <span className="font-medium">85%</span>
+                    <span className="text-muted-foreground">completion</span>
+                  </div>
+                  <div className="flex items-center gap-1">
+                    <Clock className="w-4 h-4 text-focus" />
+                    <span className="font-medium">28h</span>
+                    <span className="text-muted-foreground">this week</span>
+                  </div>
+                </div>
 
-                  {/* Theme Toggle */}
-                  <ThemeToggle />
+                {/* Notifications */}
+                <Button variant="ghost" size="icon" className="relative hover-glow">
+                  <Bell className="h-5 w-5" />
+                  {notifications > 0 && (
+                    <Badge className="absolute -top-1 -right-1 h-5 w-5 rounded-full p-0 text-xs bg-danger text-danger-foreground animate-pulse-glow">
+                      {notifications}
+                    </Badge>
+                  )}
+                </Button>
 
-                  {/* User Avatar */}
+                {/* Settings */}
+                <Button variant="ghost" size="icon" className="hover-glow">
+                  <Settings className="h-5 w-5" />
+                </Button>
+
+                {/* Theme Toggle */}
+                <ThemeToggle />
+
+                {/* User Profile */}
+                <div className="flex items-center space-x-2">
                   <div className="w-8 h-8 bg-gradient-to-br from-primary to-success rounded-full flex items-center justify-center text-white text-sm font-medium">
                     JD
+                  </div>
+                  <div className="hidden md:block">
+                    <p className="text-sm font-medium">John Doe</p>
+                    <p className="text-xs text-muted-foreground">Premium Plan</p>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-          
-          {/* Enhanced Content Area */}
-          <div className="animate-fade-in">
-            <TabsContent value="dashboard" className="mt-0">
-              <ModernDashboard />
-            </TabsContent>
-            
-            <TabsContent value="smart-calendar" className="mt-0">
-              <SmartCalendar />
-            </TabsContent>
-            
-            <TabsContent value="focus-scheduler" className="mt-0">
-              <FocusTimeScheduler />
-            </TabsContent>
-            
-            <TabsContent value="analytics" className="mt-0">
-              <div className="container mx-auto px-6 py-8">
-                <div className="text-center py-20">
-                  <BarChart3 className="w-16 h-16 mx-auto text-muted-foreground mb-4" />
-                  <h2 className="text-2xl font-bold mb-2">Analytics Dashboard</h2>
-                  <p className="text-muted-foreground mb-6">
-                    Comprehensive productivity insights and reports coming soon.
-                  </p>
-                  <Button>
-                    <Sparkles className="w-4 h-4 mr-2" />
-                    Get Early Access
-                  </Button>
-                </div>
-              </div>
-            </TabsContent>
-          </div>
-        </Tabs>
+        </div>
 
-        {/* Toast Notifications */}
+        {/* Main Application */}
+        <div className="animate-fade-in">
+          <MainDashboard />
+        </div>
+
+        {/* Enhanced Toast Notifications */}
         <Toaster 
           position="bottom-right"
           toastOptions={{
